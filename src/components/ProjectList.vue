@@ -2,10 +2,10 @@
     <div class="container">
         <div class="header">
             <div>
-                <img src="../assets/megaphone.png">
+                <img class="icon" src="../assets/megaphone.png">
                 모집중인 프로젝트
             </div>
-            <img src="../assets/chevron.png" >
+            <img class="arrow" src="../assets/chevron.png" >
         </div>
         <ProjectVue
             v-for="project in projects"
@@ -93,13 +93,13 @@ export default defineComponent({
     height: 50px;
    }
 
-   .header img {
+   .icon {
     width: 20px;
     height: 20px;
     padding-right: 5px;
    }
 
-   .header > img {
+   .arrow {
     width: 24px;
     height: 24px;
     transform: rotate(-90deg);

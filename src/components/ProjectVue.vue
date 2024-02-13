@@ -4,20 +4,26 @@
             <p
                 class="tag"
                 v-for="tag in tags" 
-                :key="tag">
+                :key="tag"
+                :class="tagColor(tag)">
                 {{ tag }}
             </p>
         </div>
         <div class="title">{{ title }}</div>
         <div class="hashTags">
-            <p
+            <div
                 class="hashTag"
                 v-for="hashTag in hashTags" 
                 :key="hashTag">
                 {{ hashTag }}
-            </p>
+            </div>
         </div>
         <div class="content">{{ content }}</div>
+        <img 
+            class="heart" 
+            :src="heartImagePath"
+            @load="onImageLoad"
+            @error="onImageError" />
     </div>
 </template>
 
@@ -33,6 +39,31 @@ export default defineComponent({
     isHearted: Boolean,
     content: String,
     likes: Number
+  },
+  methods: {
+    tagColor(tag: string) {
+      if (tag.includes('사이드 프로젝트')) {
+        return 'purple';
+      } else if (tag.includes('라이프스타일')) {
+        return 'black';
+      } else if (tag.includes('스타트업')) {
+        return 'pink';
+      } else 
+        return 'default';
+    },
+    onImageLoad() {
+      console.log('Image loaded successfully');
+    },
+    onImageError() {
+      console.log('Error loading image');
+    }
+  },
+  computed: {
+    heartImagePath() {
+      return this.isHearted
+        ? '../assets/heart_fill.png'
+        : '../assets/heart_blank.png';
+    }
   },
   data() {
     return {
@@ -62,10 +93,35 @@ export default defineComponent({
    .tags {
     display: flex;
     flex-direction: row;
+    gap: 10px;
+    margin-bottom: 10px;
 
     font-family: Pretendard;
     font-size: 14px;
     font-weight: 400;
+
+    color: #fff;
+   }
+
+   .tag {
+    display: flex;
+    padding: 3px 8px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 4px;
+   }
+
+   .purple {
+    background-color: #7A5DF5;
+   }
+
+   .black {
+    background-color: #1F1F1F;
+   }
+
+   .pink {
+    background-color: #FF26A8;
    }
 
    .title {
@@ -83,13 +139,25 @@ export default defineComponent({
     font-family: Pretendard;
     font-size: 13px;
     font-weight: 400;
+
+    margin: 2px 0px 25px;
    }
 
    .content {
     color: #6B7684;
     font-family: Pretendard;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
+
+    padding-right: 20px;
+   }
+
+   .heart {
+    width: 24px;
+    height: 24px;
+
+    position: fixed;
+    right: 85px;
    }
   </style>
   
