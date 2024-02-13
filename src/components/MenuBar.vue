@@ -8,22 +8,22 @@
       </div>
     </div>
 </template>
-<script>
-  export default {
-    name: 'MenuBar',
-    // props: {
-    //   msg: String
-    // },
-    data () {
-      return {
-        menuList : ['홈', '팀원구인', '포스트']
-      }
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'MenuBar',
+  data() {
+    return {
+      menuList: ['홈', '팀원구인', '포스트']
     }
   }
-  </script>
+});
+</script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
-  <style scoped>
+  <style lang="scss" scoped>
    .container {
      display: flex;
      justify-content: space-around;

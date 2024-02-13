@@ -5,22 +5,22 @@
       <img src="../assets/alarm.png" />
     </div>
 </template>
-<script>
-  export default {
-    name: 'HeaderVue',
-    // props: {
-    //   msg: String
-    // },
-    data () {
-      return {
-        msg: "BeVelop"
-      }
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'HeaderVue',
+  data() {
+    return {
+      msg: "BeVelop"
     }
   }
-  </script>
+});
+</script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
-  <style scoped>
+  <style lang="scss" scoped>
    div {
      display: flex;
      justify-content: space-evenly;

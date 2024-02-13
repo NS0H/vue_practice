@@ -1,30 +1,32 @@
 <template>
     <div class="container">
-        <div id="main">
+        <div class="main">
             사이드 프로젝트에서 <br />
             하나의 수입 수단까지
         </div>
-        <div id="sub">스토리 자세히 보기 ></div>
-        <div id="slide"></div>
-        <div id="focus"></div>
+        <div class="sub">스토리 자세히 보기 ></div>
+        <div class="slide">
+          <div class="focus"></div>
+        </div>
+        
     </div>
 </template>
-<script>
-  export default {
-    name: 'SlideVue',
-    // props: {
-    //   msg: String
-    // },
-    data () {
-      return {
-        msg: "BeVelop"
-      }
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'SlideVue',
+  data() {
+    return {
+      msg: "BeVelop"
     }
   }
-  </script>
+});
+</script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
-  <style scoped>
+  <style lang="scss" scoped>
    .container {
      display: flex;
      justify-content: center;
@@ -44,24 +46,21 @@
     margin: 15px;
    }
 
-   #sub {
+   .sub {
     font-size: 12px;
     color: #494949;
     margin-top: -5px;
    }
 
-   #slide {
+   .slide {
     width: 168px;
     height: 2px;
     margin-top: 25px;
 
-    background-color: black;
-    opacity: 8%;
+    background-color: rgb(0, 0, 0, 0.08);
    }
 
-   #focus {
-    position: absolute;
-    top: 245.5px;
+   .focus {
     width: 56px;
     height: 2px;
     
