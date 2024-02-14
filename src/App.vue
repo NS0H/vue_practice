@@ -3,6 +3,7 @@
     <MenuBar></MenuBar>
     <SlideVue></SlideVue>
     <ProjectList></ProjectList>
+    <PostList></PostList>
 </template>
 
 <script setup lang="ts">
@@ -10,6 +11,7 @@ import HeaderVue from './components/HeaderVue.vue';
 import MenuBar from './components/MenuBar.vue';
 import SlideVue from './components/SlideVue.vue';
 import ProjectList from './components/ProjectList.vue';
+import PostList from './components/PostList.vue';
 </script>
 
 <style lang="scss">
