@@ -20,10 +20,10 @@
         </div>
         <div class="content">{{ content }}</div>
         <img 
-            class="heart" 
+            class="heart"
+            @click="heartChange"
             :src="heartImagePath"
-            @load="onImageLoad"
-            @error="onImageError" />
+         />
     </div>
 </template>
 
@@ -33,12 +33,12 @@ import { defineComponent, PropType } from 'vue';
 export default defineComponent({
   name: 'ProjectVue',
   props: {
+    id : Number,
     tags: Array as PropType<string[]>,
     title: String,
     hashTags: Array as PropType<string[]>,
     isHearted: Boolean,
-    content: String,
-    likes: Number
+    content: String
   },
   methods: {
     tagColor(tag: string) {
@@ -51,11 +51,10 @@ export default defineComponent({
       } else 
         return 'default';
     },
-    onImageLoad() {
-      console.log('Image loaded successfully');
-    },
-    onImageError() {
-      console.log('Error loading image');
+    heartChange() {
+      this.$emit('change-heart-status', this.isHearted, this.id)
+      console.log(this.isHearted, this.id)
+      // this.isHearted = !this.isHearted;
     }
   },
   computed: {
@@ -159,6 +158,10 @@ export default defineComponent({
 
     position: absolute;
     right: 5%;
+   }
+
+   .heart:hover {
+    cursor: pointer;
    }
   </style>
   

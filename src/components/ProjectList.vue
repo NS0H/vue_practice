@@ -10,12 +10,13 @@
         <ProjectVue
             v-for="project in projects"
             :key="project.id"
+            :id="project.id"
             :title="project.title"
             :tags="project.tags"
             :hashTags="project.hashTags"
             :isHearted="project.isHearted"
             :content="project.content"
-            :likes="project.likes"
+            @change-heart-status="changeHeart"
         />
     </div>
 </template>
@@ -39,8 +40,7 @@ export default defineComponent({
           title: '사용자 개선 프로젝트 함께 하실 분 찾아요!',
           hashTags: ['#기획자', '#UI디자이너'],
           isHearted: false,
-          content: '현재 사이드 프로젝트 진행중에 있으며 초기 아이디어 구상은 끝낸 상태입니다. 많이 지원해주세요!!',
-          likes: 10
+          content: '현재 사이드 프로젝트 진행중에 있으며 초기 아이디어 구상은 끝낸 상태입니다. 많이 지원해주세요!!'
         },
         {
           id: 2,
@@ -48,10 +48,17 @@ export default defineComponent({
           title: '힙한 인테리어 소품으로 생활을 즐겁게!',
           hashTags: ['#백엔드', '#풀스택'],
           isHearted: true,
-          content: '집안을 힙하게 꾸며주는 다양한 아이템을 판매하는 서비스를 함께 만들어갈 백엔드 개발자 구해요!',
-          likes: 30
+          content: '집안을 힙하게 꾸며주는 다양한 아이템을 판매하는 서비스를 함께 만들어갈 백엔드 개발자 구해요!'
         }
       ]
+    }
+  },
+  methods: {
+    changeHeart(heart : boolean, projectId : Number) {
+      const project = this.projects.find(p => p.id === projectId);
+    if (project) {
+      project.isHearted = !heart; // 하트 상태 토글
+    }
     }
   }
 });
