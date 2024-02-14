@@ -59,10 +59,10 @@ export default defineComponent({
     }
   },
   computed: {
-    heartImagePath() {
+    heartImagePath(): string {
       return this.isHearted
-        ? '../assets/heart_fill.png'
-        : '../assets/heart_blank.png';
+        ? require('../assets/heart_fill.png')
+        : require('../assets/heart_blank.png');
     }
   },
   data() {
@@ -76,6 +76,7 @@ export default defineComponent({
   <!-- Add "scoped" attribute to limit CSS to this component only -->
   <style lang="scss" scoped>
    .project {
+    position: relative;
      display: flex;
      flex-direction: column;
      align-items: flex-start;
@@ -156,8 +157,8 @@ export default defineComponent({
     width: 24px;
     height: 24px;
 
-    position: fixed;
-    right: 85px;
+    position: absolute;
+    right: 5%;
    }
   </style>
   
