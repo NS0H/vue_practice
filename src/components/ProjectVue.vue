@@ -28,46 +28,48 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, computed} from 'vue';
 
 export default defineComponent({
   name: 'ProjectVue',
   props: {
-    id : Number,
+    id: Number,
     tags: Array as PropType<string[]>,
     title: String,
     hashTags: Array as PropType<string[]>,
     isHearted: Boolean,
     content: String
   },
-  methods: {
-    tagColor(tag: string) {
+  emits: ['change-heart-status'],
+  setup(props, { emit }) {
+    const tagColor = (tag: string) => {
       if (tag.includes('사이드 프로젝트')) {
         return 'purple';
       } else if (tag.includes('라이프스타일')) {
         return 'black';
       } else if (tag.includes('스타트업')) {
         return 'pink';
-      } else 
+      } else {
         return 'default';
-    },
-    heartChange() {
-      this.$emit('change-heart-status', this.isHearted, this.id)
-      console.log(this.isHearted, this.id)
-      // this.isHearted = !this.isHearted;
-    }
-  },
-  computed: {
-    heartImagePath(): string {
-      return this.isHearted
+      }
+    };
+
+    const heartChange = () => {
+      emit('change-heart-status', props.isHearted, props.id);
+      console.log(props.isHearted, props.id);
+    };
+
+    const heartImagePath = computed(() => {
+      return props.isHearted
         ? require('../assets/heart_fill.png')
         : require('../assets/heart_blank.png');
-    }
-  },
-  data() {
+    });
+
     return {
-      msg: "BeVelop"
-    }
+      tagColor,
+      heartChange,
+      heartImagePath
+    };
   }
 });
 </script>

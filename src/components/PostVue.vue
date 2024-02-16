@@ -2,7 +2,7 @@
     <div class="post">
         <img
             class="banner"
-            :src="getImageSrc"
+            :src=imgSrc
         />
         <div class="header">
             <div class="title">{{ title }}</div>
@@ -25,30 +25,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType} from 'vue';
 
 export default defineComponent({
   name: 'PostVue',
   props: {
-    id : Number,
-    imgSrc : String,
+    id: Number,
+    imgSrc: String,
     title: String,
-    views : Number,
+    views: Number,
     hashTags: Array as PropType<string[]>,
     isMarked: Boolean,
     content: String
-  },
-  computed: {
-    getImageSrc(): string {
-      if(this.imgSrc) {
-        return this.imgSrc
-      }
-      else {
-        return ""
-      }
-    }
-  },
+  }
 });
+
 </script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -126,6 +117,7 @@ export default defineComponent({
     height: 24px;
 
     position: absolute;
+    top: 5%;
     right: 5%;
    }
 

@@ -17,11 +17,7 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'SlideVue',
-  data() {
-    return {
-      msg: "BeVelop"
-    }
-  }
+  setup(){ }
 });
 </script>
   

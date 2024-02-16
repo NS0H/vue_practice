@@ -1,20 +1,23 @@
 <template>
-    <div >{{ msg }}
-      <img src="../assets/chevron.png" />
-      <img src="../assets/mypage.png" />
+    <div >
+      <router-link to="/">{{ msg }}</router-link>
+      <img class="arrow" src="../assets/chevron.png" />
+      <router-link to="/mypage"><img src="../assets/mypage.png" /></router-link>
       <img src="../assets/alarm.png" />
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'HeaderVue',
-  data() {
+  setup() {
+    const msg = ref("BeVelop");
+
     return {
-      msg: "BeVelop"
-    }
+      msg
+    };
   }
 });
 </script>
@@ -26,15 +29,21 @@ export default defineComponent({
      justify-content: space-evenly;
      align-items: center;
 
-     width: 100%;
+     width: 360px;
      height: 48px;
 
      font-size: 22px;
      font-family: 'Pretendard';
+     color: black;
      border: 1px solid black;
    }
 
-   div > img:nth-child(1){
+   a {
+     text-decoration: none;
+     color: black;
+   }
+
+   .arrow{
     margin-right: 150px;
    }
   </style>

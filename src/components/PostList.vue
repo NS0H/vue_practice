@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import PostVue from './PostVue.vue';
 
 export default defineComponent({
@@ -30,30 +30,33 @@ export default defineComponent({
   components: {
     PostVue
   },
-  data() {
+  setup() {
+    const msg = ref("BeVelop");
+    const posts = ref([
+      {
+          id : 1,
+          imgSrc : "/banner1.png",
+          title: "감정일기 플랫폼 '데일리'",
+          views : 117,
+          hashTags: ['#JAVA', '#Spring'],
+          isMarked: false,
+          content: "이제는 정신 건강 관리에 대한 중요성이 높아지고..."
+      },
+      {
+          id : 2,
+          imgSrc : "/banner2.png",
+          title: "감정일기 플랫폼 '데일리'",
+          views : 117,
+          hashTags: ['#JAVA', '#Spring'],
+          isMarked: false,
+          content: "이제는 정신 건강 관리에 대한 중요성이 높아지고..."
+      }
+    ]);
+
     return {
-      msg: "BeVelop",
-      posts: [
-        {
-            id : 1,
-            imgSrc : "../assets/banner1.png",
-            title: "감정일기 플랫폼 '데일리'",
-            views : 117,
-            hashTags: ['#JAVA', '#Spring'],
-            isMarked: false,
-            content: "이제는 정신 건강 관리에 대한 중요성이 높아지고..."
-        },
-        {
-            id : 2,
-            imgSrc : "../assets/banner2.png",
-            title: "감정일기 플랫폼 '데일리'",
-            views : 117,
-            hashTags: ['#JAVA', '#Spring'],
-            isMarked: false,
-            content: "이제는 정신 건강 관리에 대한 중요성이 높아지고..."
-        }
-      ]
-    }
+      msg,
+      posts
+    };
   }
 });
 </script>
