@@ -1,0 +1,59 @@
+<template>
+    <div class="background">
+        <button>
+            + 배경 이미지 추가하기
+        </button>
+    </div>
+    <img class="profile" src="../assets/profile_empty.png" />
+</template>
+
+<script lang="ts">
+import { defineComponent, ref} from 'vue';
+
+export default defineComponent({
+  name: 'ProfileImage',
+  setup() {
+    // const background = '../';
+    const profile = ref('../assets/profile_empty.png');
+
+    return {
+    profile
+   };
+   }
+});
+</script>
+  
+  <!-- Add "scoped" attribute to limit CSS to this component only -->
+  <style lang="scss" scoped>
+  .background {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 360px;
+    height: 117px;
+
+    background-color: black;
+    border-radius: 0px 0px 58.5px 0px;
+  }
+
+  .background > button {
+    background: none;
+    border: none;
+    padding: 20px;
+
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+  .profile {
+    width: 100px;
+    height: 100px;
+
+    position: absolute;
+    top: 90px;
+    left: 24px;   
+  }
+  </style>
+  

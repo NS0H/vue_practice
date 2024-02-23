@@ -23,15 +23,6 @@ export default defineComponent({
 })
 </script>
 
-<!-- <style lang="scss" scoped>
-// #app {
-//   margin: 0 auto;
-//   height: 100%;
-//   max-width: 360px;
-//   display: grid;
-//   place-items: center;
-// }
-</style> -->
 
 
 <!--
