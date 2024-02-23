@@ -1,6 +1,6 @@
 <template>
     <div class="profile_form">
-      <form @submit.prevent="submitForm">
+      <form>
         <div>
           <label for="name">닉네임</label>
           <input v-model="profile.name" id="name" type="text">
@@ -13,35 +13,35 @@
           <label for="profile">프로필</label>
           <div class="profile_select">
             <select v-model="profile.role" id="role">
-                <option value="role">직무</option>
+                <option value="role" disabled selected>직무</option>
                 <option value="UX Designer">UX Designer</option>
                 <option value="UI Designer">UI Designer</option>
               <!-- ... 추가 역할 -->
             </select>
             <select v-model="profile.object" id="object">
-                <option value="object">관심분야</option>
+                <option value="object" disabled selected>관심분야</option>
               <option value="UX Designer">UX Designer</option>
               <option value="UI Designer">UI Designer</option>
               <!-- ... 추가 역할 -->
             </select>
           </div>
         </div>
-        <div>
+        <div class="portfolio">
             <label for="portfolio">포트폴리오</label>
-            <input v-model="profile.pdf" id="pdf" type="text">
-            <input v-model="profile.link" id="link" type="text">
+            <input v-model="profile.pdf" id="pdf" type="text" placeholder="포트폴리오 첨부(PDF 권장)">
+            <input v-model="profile.link" id="link" type="text" placeholder="링크/URL">
         </div>
-        <div>
+        <div class="techstack">
             <label for="techstack">기술스택</label>
-            <input v-model="profile.tech" id="tech" type="text">
+            <input v-model="profile.tech" id="tech" type="text" placeholder="기술 스택을 추가해보세요">
         </div>
-        <button type="submit">입력 완료</button>
+        <button type="button" @click="submitForm">입력 완료</button>
       </form>
     </div>
 </template>
   
 <script lang="ts">
-import { defineComponent, reactive, toRaw } from 'vue';
+import { defineComponent, reactive} from 'vue';
 
 interface Profile {
   name: string;
@@ -61,17 +61,17 @@ export default defineComponent({
   setup(props, { emit }) {
     const profile = reactive<Profile>({
       name: '',
+      des: '',
       role: 'role',
       object: 'object',
-      des: '',
       pdf: '',
       link: '',
       tech: '',
     });
 
     function submitForm() {
-      // `toRaw`를 사용하여 반응성을 가진 `profile` 객체를 일반 객체로 변환합니다.
-      emit('formSubmitted', toRaw(profile));
+      // 폼 제출 로직
+      emit('formSubmitted', profile); // 메인 페이지로 변경할 컴포넌트와 프로필 데이터 전달
     }
 
     return {
@@ -132,10 +132,32 @@ textarea {
 
 .profile_select select {
     width: 156px;
+    padding-left: 20px;
+
+    color: #404A5C;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.portfolio input {
+    color: #404A5C;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 20px;
 }
 
 #pdf {
     margin-bottom: 12px;
+}
+
+.techstack input {
+    text-align: center;
+    color: #404A5C;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 button {
@@ -150,5 +172,7 @@ button {
     font-family: Pretendard;
     font-size: 16px;
     font-weight: 500;
+
+    margin-top: 27px;
 }
 </style>
