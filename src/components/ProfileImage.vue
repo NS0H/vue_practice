@@ -1,10 +1,15 @@
 <template>
     <div class="background">
-        <button>
-            + 배경 이미지 추가하기
-        </button>
+      <button>
+        + 배경 이미지 추가하기
+      </button>
     </div>
-    <img class="profile" src="../assets/profile_empty.png" />
+    <div class="profile">
+      <img src="../assets/profile_empty.png" />
+      <button>
+        +
+      </button>
+    </div>
 </template>
 
 <script lang="ts">
@@ -45,15 +50,35 @@ export default defineComponent({
     font-family: Pretendard;
     font-size: 16px;
     font-weight: 500;
-}
+  }
 
-  .profile {
+  button:hover {
+    cursor: pointer;
+  }
+
+  .profile > img {
     width: 100px;
     height: 100px;
 
     position: absolute;
     top: 90px;
     left: 24px;   
+  }
+
+  .profile > button {
+    width: 30px;
+    height: 30px;
+
+    font-size: 25px;
+    font-weight: 100;
+    color: #FFFFFF;
+    background-color: #8B95A1;
+    border: none;
+    border-radius: 20px;
+
+    position: absolute;
+    top: 160px;
+    left: 90px; 
   }
   </style>
   

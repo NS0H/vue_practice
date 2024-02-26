@@ -1,8 +1,11 @@
 <template>
     <div class="profile-display">
         <div class="personal">
+          <div>
             <div class="name">{{ profile.name }}</div>
-            <div class="description">{{ profile.des }}</div>
+            <button class="re_btn" @click="editProfile">프로필 수정 ></button>
+          </div>
+          <div class="description">{{ profile.des }}</div>
         </div>
         <p class="hr"></p>
         <div>
@@ -22,6 +25,7 @@
   
   <script lang="ts">
   import { defineComponent, PropType } from 'vue';
+  import { computed } from 'vue';
   
   export default defineComponent({
     name: 'ProfileDisplay',
@@ -40,12 +44,13 @@
       },
     },
     setup(props, { emit }) {
-    function editProfile() {
-      emit('showForm'); // 메인 페이지에서 폼을 다시 보여주도록 요청
-    }
+      const profile = computed(() => props.profile);
+      function editProfile() {
+        emit('showForm', profile); // 메인 페이지에서 폼을 다시 보여주도록 요청
+      }
 
-    return { editProfile };
-  }
+      return { editProfile };
+    }
   });
   </script>
   
@@ -57,10 +62,17 @@
     width: 360px;
     padding-top: 48px;
   }
+
   .profile-display > div {
     padding-left: 20px;
     width: 320px;
   }
+
+  .personal > div:first-child {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .name {
     color: #000;
     font-family: Pretendard;
@@ -68,6 +80,20 @@
     font-weight: 600;
 
     padding-bottom: 13px;
+  }
+
+  .re_btn {
+    border: none;
+    color: #8B95A1;
+    background-color: #FFFFFF;
+    text-align: right;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .re_btn:hover {
+    cursor: pointer;
   }
 
   .description {

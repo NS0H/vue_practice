@@ -3,22 +3,30 @@
       <form>
         <div>
           <label>닉네임</label>
-          <input v-model="profile.name" id="name" type="text">
+          <input 
+            v-model="profile.name" 
+            :class="{'highlight': profile.name}"
+            id="name" 
+            type="text">
         </div>
         <div>
             <label >한줄소개</label>
-            <textarea v-model="profile.des" id="des"></textarea>
+            <textarea 
+              v-model="profile.des"
+              :class="{'highlight': profile.des}" 
+              id="des">
+            </textarea>
         </div>
         <div>
           <label>프로필</label>
           <div class="profile_select">
-            <select v-model="profile.role" id="role">
-                <option value="role" disabled selected>직무</option>
+            <select v-model="profile.role" :class="{'highlight': profile.role}" id="role">
+                <option value="" disabled selected>직무</option>
                 <option value="UX Designer">UX Designer</option>
                 <option value="UI Designer">UI Designer</option>
             </select>
-            <select v-model="profile.object" id="object">
-                <option value="object" disabled selected>관심분야</option>
+            <select v-model="profile.object" :class="{'highlight': profile.object}" id="object">
+                <option value="" disabled selected>관심분야</option>
               <option value="Service Design">서비스 디자인</option>
               <option value="Web Design">웹 디자인</option>
             </select>
@@ -26,8 +34,18 @@
         </div>
         <div class="portfolio">
             <label>포트폴리오</label>
-            <input v-model="profile.pdf" id="pdf" type="text" placeholder="포트폴리오 첨부(PDF 권장)">
-            <input v-model="profile.link" id="link" type="text" placeholder="링크/URL">
+            <input 
+              v-model="profile.pdf" 
+              :class="{'highlight': profile.pdf}"
+              id="pdf" 
+              type="text" 
+              placeholder="포트폴리오 첨부(PDF 권장)">
+            <input 
+              v-model="profile.link" 
+              :class="{'highlight': profile.link}"
+              id="link" 
+              type="text" 
+              placeholder="링크/URL">
         </div>
         <div class="techstack">
             <label>기술스택</label>
@@ -56,12 +74,13 @@ export default defineComponent({
   emits: {
     formSubmitted: null, // 검증 함수가 필요 없다면 null을 할당할 수 있습니다.
   },
+  
   setup(props, { emit }) {
     const profile = reactive<Profile>({
       name: '',
       des: '',
-      role: 'role',
-      object: 'object',
+      role: '',
+      object: '',
       pdf: '',
       link: '',
       tech: '',
@@ -158,6 +177,8 @@ textarea {
     font-family: Pretendard;
     font-size: 14px;
     font-weight: 500;
+
+    border: 1px dashed #8B95A1;
 }
 
 button {
@@ -174,5 +195,14 @@ button {
     font-weight: 500;
 
     margin-top: 27px;
+}
+
+input:focus, textarea:focus, select:focus {
+  border: 1px solid #7A5DF5;
+  outline: none;
+}
+
+.highlight {
+  border: 1px solid #7A5DF5;
 }
 </style>
