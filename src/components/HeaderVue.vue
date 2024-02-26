@@ -1,22 +1,34 @@
 <template>
     <div >
-      <router-link to="/">{{ msg }}</router-link>
+      <span class="page" @click="goToHome">{{ msg }}</span>
       <img class="arrow" src="../assets/chevron.png" />
-      <router-link to="/mypage"><img src="../assets/mypage.png" /></router-link>
+      <img class="page" src="../assets/mypage.png" @click="goToMyPage" />
       <img src="../assets/alarm.png" />
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'HeaderVue',
   setup() {
+    const router = useRouter();
     const msg = ref("BeVelop");
 
+    function goToHome() {
+      router.push('/');
+    }
+
+    function goToMyPage() {
+      router.push('/mypage');
+    }
+
     return {
-      msg
+      msg,
+      goToHome,
+      goToMyPage
     };
   }
 });
@@ -35,7 +47,10 @@ export default defineComponent({
      font-size: 22px;
      font-family: 'Pretendard';
      color: black;
-     border: 1px solid black;
+   }
+
+   .page:hover {
+    cursor: pointer;
    }
 
    a {
