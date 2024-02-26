@@ -123,6 +123,9 @@
   .result {
     width: 320px;
     height: 48px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
 
     border-radius: 6px;
     border: 1px solid #DADEE2;

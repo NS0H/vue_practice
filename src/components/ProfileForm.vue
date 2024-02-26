@@ -2,37 +2,35 @@
     <div class="profile_form">
       <form>
         <div>
-          <label for="name">닉네임</label>
+          <label>닉네임</label>
           <input v-model="profile.name" id="name" type="text">
         </div>
         <div>
-            <label for="description">한줄소개</label>
+            <label >한줄소개</label>
             <textarea v-model="profile.des" id="des"></textarea>
         </div>
         <div>
-          <label for="profile">프로필</label>
+          <label>프로필</label>
           <div class="profile_select">
             <select v-model="profile.role" id="role">
                 <option value="role" disabled selected>직무</option>
                 <option value="UX Designer">UX Designer</option>
                 <option value="UI Designer">UI Designer</option>
-              <!-- ... 추가 역할 -->
             </select>
             <select v-model="profile.object" id="object">
                 <option value="object" disabled selected>관심분야</option>
-              <option value="UX Designer">UX Designer</option>
-              <option value="UI Designer">UI Designer</option>
-              <!-- ... 추가 역할 -->
+              <option value="Service Design">서비스 디자인</option>
+              <option value="Web Design">웹 디자인</option>
             </select>
           </div>
         </div>
         <div class="portfolio">
-            <label for="portfolio">포트폴리오</label>
+            <label>포트폴리오</label>
             <input v-model="profile.pdf" id="pdf" type="text" placeholder="포트폴리오 첨부(PDF 권장)">
             <input v-model="profile.link" id="link" type="text" placeholder="링크/URL">
         </div>
         <div class="techstack">
-            <label for="techstack">기술스택</label>
+            <label>기술스택</label>
             <input v-model="profile.tech" id="tech" type="text" placeholder="기술 스택을 추가해보세요">
         </div>
         <button type="button" @click="submitForm">입력 완료</button>
@@ -122,6 +120,8 @@ textarea {
     border-radius: 6px;
     border: 1px solid #DADEE2;
     background: #FFF;
+
+    resize: none;
 }
 
 .profile_select {
