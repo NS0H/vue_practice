@@ -1,11 +1,11 @@
 <template>
     <ProfileImage></ProfileImage>
-    <ProfileForm v-if="currentView === 'form'" :initialProfile="profile" @formSubmitted="showDisplay" />
+    <ProfileForm v-if="currentView === 'form'" @formSubmitted="showDisplay" />
     <ProfileDisplay v-if="currentView === 'display'" :profile="profile" @showForm="showForm" />
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue';
+import { defineComponent, ref } from 'vue';
 import ProfileImage from "../components/ProfileImage.vue";
 import ProfileForm from '../components/ProfileForm.vue';
 import ProfileDisplay from '../components/ProfileDisplay.vue';
@@ -29,7 +29,7 @@ export default defineComponent({
   },
   setup() {
     const currentView = ref('form'); // 'form' 또는 'display'
-    const profile = reactive<Profile>({ 
+    const profile = ref({ 
         name: '',
         des: '',
         role: 'role',
@@ -39,13 +39,12 @@ export default defineComponent({
         tech: '',
     });
 
-    function showForm(updatedProfile: Profile) {
-      Object.assign(profile, updatedProfile);
+    function showForm() {
       currentView.value = 'form';
     }
 
     function showDisplay(updatedProfile: Profile) {
-      Object.assign(profile, updatedProfile); // ProfileForm에서 전달된 프로필 정보 업데이트
+      profile.value = updatedProfile; // ProfileForm에서 전달된 프로필 정보 업데이트
       currentView.value = 'display';
     }
 

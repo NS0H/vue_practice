@@ -25,7 +25,6 @@
   
   <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  import { computed } from 'vue';
   
   export default defineComponent({
     name: 'ProfileDisplay',
@@ -44,13 +43,12 @@
       },
     },
     setup(props, { emit }) {
-      const profile = computed(() => props.profile);
-      function editProfile() {
-        emit('showForm', profile); // 메인 페이지에서 폼을 다시 보여주도록 요청
-      }
-
-      return { editProfile };
+    function editProfile() {
+      emit('showForm'); // 메인 페이지에서 폼을 다시 보여주도록 요청
     }
+
+    return { editProfile };
+  }
   });
   </script>
   
