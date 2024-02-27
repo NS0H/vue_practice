@@ -8,6 +8,9 @@
             :class="{'highlight': profile.name}"
             id="name" 
             type="text">
+            <div v-if="showNameMessage" class="pop_text">
+              사용 가능한 닉네임입니다.
+            </div>
         </div>
         <div>
             <label >한줄소개</label>
@@ -34,18 +37,25 @@
         </div>
         <div class="portfolio">
             <label>포트폴리오</label>
-            <input 
-              v-model="profile.pdf" 
-              :class="{'highlight': profile.pdf}"
-              id="pdf" 
-              type="text" 
-              placeholder="포트폴리오 첨부(PDF 권장)">
-            <input 
-              v-model="profile.link" 
-              :class="{'highlight': profile.link}"
-              id="link" 
-              type="text" 
-              placeholder="링크/URL">
+            <div class="file_upload"  :class="{ 'highlight': fileName }">
+              <input 
+                :class="{'highlight': profile.pdf}"
+                id="pdf" 
+                type="file" 
+                @change="handleFileChange"
+                hidden>
+              <div class="file_name">{{ fileName ? fileName : '포트폴리오 첨부(PDF 권장)' }}</div>
+              <label for="pdf" class="upload_btn">수정</label>
+            </div>
+              <input 
+                v-model="profile.link" 
+                :class="{'highlight': profile.link}"
+                id="link" 
+                type="text" 
+                placeholder="링크/URL">
+              <div v-if="showLinkMessage" class="pop_text">
+                올바른 형식의 링크를 넣어주세요.
+              </div>
         </div>
         <div class="techstack">
             <label>기술스택</label>
@@ -57,14 +67,14 @@
 </template>
   
 <script lang="ts">
-import { defineComponent, reactive} from 'vue';
+import { defineComponent, reactive, computed, ref} from 'vue';
 
 interface Profile {
   name: string;
   des: string;
   role: string;
   object: string;
-  pdf: string;
+  pdf: File | null;
   link: string;
   tech: string;
 }
@@ -72,28 +82,48 @@ interface Profile {
 export default defineComponent({
   name: 'ProfileForm',
   emits: {
-    formSubmitted: null, // 검증 함수가 필요 없다면 null을 할당할 수 있습니다.
+    formSubmitted: null,
   },
-  
   setup(props, { emit }) {
+    const fileName = ref('');
     const profile = reactive<Profile>({
       name: '',
       des: '',
       role: '',
       object: '',
-      pdf: '',
+      pdf: null,
       link: '',
       tech: '',
     });
 
+    const showNameMessage = computed(() => {
+      return !profile.name.includes('a') && profile.name !== '';
+    });
+
+    const showLinkMessage = computed(() => {
+      return !profile.link.includes('http') && !profile.link.includes('www') && profile.link !== '' ;
+    });
+
+    function handleFileChange(event: Event) {
+      const inputElement = event.target as HTMLInputElement;
+      const files = inputElement.files;
+      if (files && files[0]) {
+        profile.pdf = files[0];
+        fileName.value = files[0].name;
+      }
+    }
+
     function submitForm() {
-      // 폼 제출 로직
-      emit('formSubmitted', profile); // 메인 페이지로 변경할 컴포넌트와 프로필 데이터 전달
+      emit('formSubmitted', profile);
     }
 
     return {
       profile,
+      fileName,
       submitForm,
+      showNameMessage,
+      showLinkMessage,
+      handleFileChange
     };
   },
 });
@@ -118,6 +148,15 @@ form > div {
     margin: 21px auto;
 }
 
+.pop_text {
+  margin-top: 8px;
+
+  color: #7A5DF5;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-weight: 500;
+}
+
 label {
     color: #000;
     font-family: Pretendard;
@@ -127,7 +166,7 @@ label {
     margin-bottom: 18px;
 }
 
-input, select {
+input, select, .file_upload {
     height: 48px;
     border-radius: 6px;
     border: 1px solid #DADEE2;
@@ -159,7 +198,7 @@ textarea {
     font-weight: 500;
 }
 
-.portfolio input {
+.portfolio input, .file_name {
     color: #404A5C;
     font-family: Pretendard;
     font-size: 14px;
@@ -167,8 +206,27 @@ textarea {
     padding-left: 20px;
 }
 
-#pdf {
+.portfolio input::placeholder {
+  color: #404A5C;
+}
+
+.file_upload {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 12px;
+}
+
+.upload_btn {
+  color: #8B95A1;
+  text-align: right;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-weight: 500;
+
+  margin-right: 20px;
+  margin-bottom: 0px;
 }
 
 .techstack input {
@@ -197,12 +255,16 @@ button {
     margin-top: 27px;
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus, textarea:focus, select:focus, .file_upload:focus {
   border: 1px solid #7A5DF5;
   outline: none;
 }
 
 .highlight {
   border: 1px solid #7A5DF5;
+}
+
+button, .upload_btn {
+  cursor: pointer;
 }
 </style>

@@ -15,7 +15,7 @@ interface Profile {
     role: string;
     object: string;
     des: string;
-    pdf: string;
+    pdf: File | null;
     tech: string;
     link: string;
 }
@@ -28,13 +28,13 @@ export default defineComponent({
     ProfileDisplay
   },
   setup() {
-    const currentView = ref('form'); // 'form' 또는 'display'
+    const currentView = ref('form');
     const profile = ref({ 
         name: '',
         des: '',
-        role: 'role',
-        object: 'object',
-        pdf: '',
+        role: '',
+        object: '',
+        pdf: null,
         link: '',
         tech: '',
     });
@@ -44,7 +44,7 @@ export default defineComponent({
     }
 
     function showDisplay(updatedProfile: Profile) {
-      profile.value = updatedProfile; // ProfileForm에서 전달된 프로필 정보 업데이트
+      Object.assign(profile.value, updatedProfile);
       currentView.value = 'display';
     }
 

@@ -15,7 +15,7 @@
                 <div>{{ profile.object }}</div>
             </div>
             <div class="label">포트폴리오</div>
-            <div class="result pdf">{{ profile.pdf }}</div>
+            <div class="result pdf">{{ profile.pdf?.name || '파일 없음' }}</div>
             <div class="result">{{ profile.link }}</div>
             <div class="label">기술스택</div>
             <div class="result">{{ profile.tech }}</div>
@@ -31,20 +31,20 @@
     props: {
       profile: {
         type: Object as PropType<{ 
-            name: String;
-            des: String;
-            role: String;
-            object: String;
-            pdf: String;
-            link: String;
-            tech: String;
+          name: string;
+          des: string;
+          role: string;
+          object: string;
+          pdf: File | null;
+          link: string;
+          tech: string;
         }>,
         required: true,
       },
     },
     setup(props, { emit }) {
     function editProfile() {
-      emit('showForm'); // 메인 페이지에서 폼을 다시 보여주도록 요청
+      emit('showForm'); 
     }
 
     return { editProfile };
