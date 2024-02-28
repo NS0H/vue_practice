@@ -16,8 +16,8 @@ interface Profile {
     object: string;
     des: string;
     pdf: File | null;
-    tech: string;
     link: string;
+    tech: string[];
 }
 
 export default defineComponent({
@@ -36,7 +36,7 @@ export default defineComponent({
         object: '',
         pdf: null,
         link: '',
-        tech: '',
+        tech: [],
     });
 
     function showForm() {
