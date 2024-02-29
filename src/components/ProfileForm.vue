@@ -28,13 +28,13 @@
         <div class="profile_select">
           <select v-model="profile.role" :class="{'highlight': profile.role}" id="role">
               <option value="" disabled selected>직무</option>
-              <option value="UX Designer">UX Designer</option>
-              <option value="UI Designer">UI Designer</option>
+              <option value="UX 디자이너">UX 디자이너</option>
+              <option value="UI 디자이너">UI 디자이너</option>
           </select>
           <select v-model="profile.object" :class="{'highlight': profile.object}" id="object">
               <option value="" disabled selected>관심분야</option>
-            <option value="Service Design">서비스 디자인</option>
-            <option value="Web Design">웹 디자인</option>
+            <option value="서비스 디자인">서비스 디자인</option>
+            <option value="웹 디자인">웹 디자인</option>
           </select>
         </div>
       </div>
