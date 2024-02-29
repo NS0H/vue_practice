@@ -1,5 +1,5 @@
 <template>
-    <ProfileImage></ProfileImage>
+    <ProfileImage :current-view="currentView"></ProfileImage>
     <ProfileForm v-if="currentView === 'form'" @formSubmitted="showDisplay" />
     <ProfileDisplay v-if="currentView === 'display'" :profile="profile" @showForm="showForm" />
 </template>

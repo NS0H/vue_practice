@@ -1,14 +1,37 @@
 <template>
-  <div class="background">
-    <button>
-      + 배경 이미지 추가하기
-    </button>
+  <div 
+    class="background"
+    :style="{ backgroundImage: 'url(' + backgroundImageUrl + ')' }">
+    <label 
+      v-if="currentView === 'form'" 
+      for="backgroundImage" 
+      class="btn_back">
+      + 배경 이미지 수정하기
+    </label>
+    <input 
+      id="backgroundImage"
+      type="file" 
+      @change="handleBackgroundImageChange" 
+      accept="image/*"
+      hidden />
   </div>
   <div class="profile">
-    <img src="../assets/profile_empty.png" />
-    <button>
+    <div 
+      class="img_profile"
+      :style="{ backgroundImage: 'url(' + profileImageUrl + ')' }">
+    </div>
+    <label 
+      v-if="currentView === 'form'" 
+      for="profileImage" 
+      class="btn_profile">
       +
-    </button>
+    </label>
+    <input 
+      id="profileImage"
+      type="file" 
+      @change="handleProfileImageChange" 
+      accept="image/*"
+      hidden />
   </div>
 </template>
 
@@ -18,14 +41,46 @@ import { defineComponent, ref} from 'vue';
 
 export default defineComponent({
   name: 'ProfileImage',
+  props: {
+    currentView: String
+  },
   setup() {
-    // const background = '../';
-    const profile = ref('../assets/profile_empty.png');
+    const profileImageUrl = ref('');
+    const backgroundImageUrl = ref('');
+    
+    const handleProfileImageChange = (event: Event) => {
+      const files = (event.target as HTMLInputElement).files;
+      if (files && files[0]) {
+        const fileReader = new FileReader();
+        fileReader.onload = (e) => {
+          if (e.target && e.target.result) {
+            profileImageUrl.value = e.target.result as string;
+          }
+        };
+        fileReader.readAsDataURL(files[0]);
+      }
+    };
+
+    const handleBackgroundImageChange = (event: Event) => {
+      const files = (event.target as HTMLInputElement).files;
+      if (files && files[0]) {
+        const fileReader = new FileReader();
+        fileReader.onload = (e) => {
+          if (e.target && e.target.result) {
+            backgroundImageUrl.value = e.target.result as string;
+          }
+        };
+        fileReader.readAsDataURL(files[0]);
+      }
+    };
 
     return {
-    profile
-   };
-   }
+      profileImageUrl,
+      backgroundImageUrl,
+      handleProfileImageChange,
+      handleBackgroundImageChange
+    };
+  }
 });
 </script>
   
@@ -39,10 +94,12 @@ export default defineComponent({
   height: 117px;
 
   background-color: black;
+  background-size: cover;
+  background-position: center;
   border-radius: 0px 0px 58.5px 0px;
 }
 
-.background > button {
+.btn_back {
   background: none;
   border: none;
   padding: 20px;
@@ -53,20 +110,26 @@ export default defineComponent({
   font-weight: 500;
 }
 
-.profile > img {
+.img_profile {
   width: 100px;
   height: 100px;
+  background-color: #F2F4F6;
+  border-radius: 100px;
+  border: 3px solid #FFF;
+  background-size: cover;
+  background-position: center;
 
   position: absolute;
   top: 90px;
   left: 24px;   
 }
 
-.profile > button {
+.btn_profile {
   width: 30px;
   height: 30px;
+  text-align: center;
 
-  font-size: 25px;
+  font-size: 27px;
   font-weight: 100;
   color: #FFFFFF;
   background-color: #8B95A1;
@@ -75,10 +138,10 @@ export default defineComponent({
 
   position: absolute;
   top: 160px;
-  left: 90px; 
+  left: 100px;
 }
 
-button:hover {
+label:hover {
   cursor: pointer;
 }
 </style>
